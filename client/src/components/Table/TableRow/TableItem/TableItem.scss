@@ -1,0 +1,17 @@
+.table__column {
+  padding: 16px 8px;
+  font-size: 14px;
+  line-height: 17px;
+  max-width: 300px;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  &:first-child {
+    padding: 16px 8px 16px 16px;
+  }
+  &:last-child {
+    padding: 16px 16px 16px 8px;
+  }
+}

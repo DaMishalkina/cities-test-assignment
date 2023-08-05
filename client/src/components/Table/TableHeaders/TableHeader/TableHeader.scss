@@ -1,0 +1,18 @@
+.table__header {
+  background: white;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 16px 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: capitalize;
+  &:first-child {
+    padding: 16px 8px 16px 16px;
+  }
+  &:last-child {
+    padding: 16px 16px 16px 8px;
+  }
+}

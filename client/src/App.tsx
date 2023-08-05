@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
+import {CitiesTable} from "./features/CitiesTable/CitiesTable";
+
 type City = {
     name: string,
     name_native: string,
@@ -9,7 +11,7 @@ type City = {
     longitude: string,
     population: string,
     founded: string,
-    landmarks: string[]
+    // landmarks: string[]
 }
 
 const fetchData = async () => {
@@ -30,9 +32,12 @@ function App() {
     }, [])
     return (
         <div>
-            {cities.map((city, id) => (
-                <div key={id}>{JSON.stringify(city)}</div>
-            ))}
+            {cities.length > 0 ? (
+                <CitiesTable cities={cities} />
+            ) : (
+                <div>waiting</div>
+            )}
+
         </div>
   );
 }
