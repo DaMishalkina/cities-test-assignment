@@ -16,3 +16,25 @@
     padding: 16px 16px 16px 8px;
   }
 }
+
+.header-container {
+  display: flex;
+  justify-content: center;
+}
+.header-container--sortable {
+  justify-content: space-between;
+}
+
+.header-container__button {
+  width: 16px;
+  height: 16px;
+  border-style: none;
+  padding: 0;
+  color: #9E9E9E;
+  background-color: transparent;
+}
+
+.header-container__icon {
+  width: 16px;
+  height: 16px;
+}
