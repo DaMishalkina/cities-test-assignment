@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import DeckGL from "@deck.gl/react/typed";
 import { ScatterplotLayer} from "@deck.gl/layers/typed";
 import {Map as Mapbox} from "react-map-gl";
@@ -7,7 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./Map.scss";
 
 type MapDataType = {
-    [key: string]: string
+    [key: string]: string | number
 }
 
 interface Props {
@@ -30,14 +30,17 @@ export const Map = ({
     const [lng, setLng] = useState(Number(longitude));
     const [lat, setLat] = useState(Number(latitude));
     const [zoom, setZoom] = useState(8);
+
+
     const layers = [
         new ScatterplotLayer({
             id: "scatterplot-layer",
-            data,
+            data: data,
             getPosition: (d: MapDataType) => [Number(d.longitude), Number(d.latitude), 0],
+            getFillColor: [0, 119, 255],
+            getRadius: 400,
             radiusScale: 10,
-            getFillColor: [255, 0, 128],
-            getRadius: 300
+            radiusMinPixels: 1,
         })
     ]
     return (
