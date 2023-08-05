@@ -24,17 +24,19 @@ interface Props {
 }
 
 export const CitiesTable = ({cities}: Props) => {
-    const [headers, setHeaders] = useState(Object.keys(cities[0]).map(key => {
+    const [renderedCities, setRenderedCities] =  useState<CityTableType[]>(
+        JSON.parse(JSON.stringify(cities))
+            .map((city: CityDataType) => {
+                delete city.id;
+                delete city.landmarks;
+                delete city.latitude;
+                delete city.longitude
+                return city;
+            }))
+    const [headers, setHeaders] = useState(Object.keys(renderedCities[0]).map(key => {
         key = key.replace( "_", " ");
         return key;
     }));
-    const [renderedCities, setRenderedCities] =  useState<CityTableType[]>(cities.map(city => {
-        delete city.id;
-        delete city.landmarks;
-        delete city.latitude;
-        delete city.longitude
-        return city;
-    }))
     return (
         <>
             <Table data={renderedCities} headers={headers} />
