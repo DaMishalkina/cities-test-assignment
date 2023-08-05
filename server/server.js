@@ -11,7 +11,7 @@ fs.readFile("./cities.json", "utf8", (err,data) => {
     cities = JSON.parse(data);
     cities["cities"] = cities["cities"].map(city => {
         city.id = city["name"].toLowerCase().replace(/\s/g, "-");
-        return city
+        return city;
     })
 
 })
