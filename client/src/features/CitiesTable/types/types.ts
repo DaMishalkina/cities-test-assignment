@@ -8,9 +8,8 @@ export type CityDateTypeForTable = {
     founded: string | number
 }
 
-export interface CityDataType extends CityDateTypeForTable {
+export type CityDataType = CityDateTypeForTable  &{
     id?: string,
-    landmarks?: string[],
     latitude?: string,
     longitude?: string,
 }

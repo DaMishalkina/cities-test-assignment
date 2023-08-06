@@ -12,6 +12,7 @@ fs.readFile("./cities.json", "utf8", (err,data) => {
     // This can be done on the db/file level, but for simplicity I create id on the fly.
     cities["cities"] = cities["cities"].map(city => {
         city.id = city["name"].toLowerCase().replace(/\s/g, "-");
+        delete  city["landmarks"]
         return city;
     })
 

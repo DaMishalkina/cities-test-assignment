@@ -19,11 +19,10 @@ const compare = (a: string | number, b: string | number) => {
 export const CitiesTable = ({cities}: Props) => {
     const headers = Object.keys(cities[0]);
     const restructureData = (data: CityDataType[]) => {
-       return  data.map(item => {
+       return  JSON.parse(JSON.stringify(data)).map((item: CityDataType ) => {
             item.population = Number(item.population);
             item.founded = Number(item.founded);
             delete item.id;
-            delete item.landmarks;
             delete item.latitude;
             delete item.longitude
             return item;
