@@ -2,17 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {CitiesTable} from "./features/CitiesTable/CitiesTable";
 
-type City = {
-    name: string,
-    name_native: string,
-    country: string,
-    continent: string,
-    latitude: string,
-    longitude: string,
-    population: string,
-    founded: string,
-    // landmarks: string[]
-}
+import {CityDataType} from "./features/CitiesTable/types/types";
 
 const fetchData = async () => {
 
@@ -24,7 +14,7 @@ const fetchData = async () => {
     });
 }
 function App() {
-    const [cities, setCities] = useState<City[]>([]);
+    const [cities, setCities] = useState<CityDataType[]>([]);
     useEffect(() => {
         fetchData().then((data) => {
             setCities(data.cities)

@@ -9,6 +9,7 @@ fs.readFile("./cities.json", "utf8", (err,data) => {
         console.error(err);
     }
     cities = JSON.parse(data);
+    // This can be done on the db/file level, but for simplicity I create id on the fly.
     cities["cities"] = cities["cities"].map(city => {
         city.id = city["name"].toLowerCase().replace(/\s/g, "-");
         return city;
@@ -16,10 +17,13 @@ fs.readFile("./cities.json", "utf8", (err,data) => {
 
 })
 
+
+// At scale this request could be optimized by returning only particular fields instead of the whole db/file.
 app.get("/cities", (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     res.json(cities);
 })
+
 
 app.get("/landmarks/:id", (req, res) => {
     const id = req.params.id;

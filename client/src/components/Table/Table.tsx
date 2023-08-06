@@ -9,16 +9,26 @@ import "./Table.scss"
 
 interface Props {
     data: TableDataType,
-    headers?: string[]
+    headers?: string[],
+    sortColumnData?: (header: string, sortState: string) => void
 }
 
-export const Table = ({data, headers}: Props) => {
+export const Table = ({data, headers, sortColumnData}: Props) => {
+    const sortData = (header: string, sortState: string) => {
+        typeof sortColumnData !== "undefined" && sortColumnData(header, sortState);
+    };
     return (
         <div className="table-wrapper">
             <table className="table">
                 {typeof headers !== "undefined" && headers.length > 0 && (
                     <thead className="table__heading">
-                    <TableHeaders headers={headers} />
+                    <TableHeaders
+                        isSortable={sortColumnData !== undefined}
+                        headers={headers}
+                        handleSort={(header, sortState) => {
+                            typeof sortColumnData !== "undefined" && sortData(header, sortState)
+                        }}
+                    />
                     </thead>
                 )}
                 <tbody>
