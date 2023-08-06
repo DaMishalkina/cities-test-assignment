@@ -36,3 +36,4 @@
 *.xd
 *.prettierignore
 *.env
+*-lock.json
