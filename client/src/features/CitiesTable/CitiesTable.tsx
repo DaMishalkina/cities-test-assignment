@@ -2,22 +2,7 @@ import React, {useState} from "react";
 
 import {Table} from "../../components/Table/Table";
 
-
-export type CityTableType = {
-    name: string,
-    name_native: string,
-    country: string,
-    continent: string,
-    population: string | number,
-    founded: string | number
-}
-
-interface CityDataType extends CityTableType {
-    id?: string,
-    landmarks?: string[],
-    latitude?: string,
-    longitude?: string,
-}
+import {CityDataType, CityDateTypeForTable} from "./types/types";
 
 interface Props {
     cities: CityDataType[]
@@ -44,18 +29,18 @@ export const CitiesTable = ({cities}: Props) => {
             return item;
         })
     }
-    const [renderedCities, setRenderedCities] =  useState<CityTableType[]>(restructureData(cities))
+    const [renderedCities, setRenderedCities] =  useState<CityDateTypeForTable[]>(restructureData(cities))
     const sortData = (header: string, sortState: string) => {
         const lowerCaseHeader = header.toLowerCase();
         let result = renderedCities;
         switch (sortState){
             case "ascending":
                result = [...result].sort((a, b) =>
-                compare(a[lowerCaseHeader as keyof CityTableType], b[lowerCaseHeader as keyof CityTableType]));
+                compare(a[lowerCaseHeader as keyof CityDateTypeForTable], b[lowerCaseHeader as keyof CityDateTypeForTable]));
                 break;
             case "descending":
                 result = [...result].sort((a, b) =>
-                    compare(b[lowerCaseHeader as keyof CityTableType], a[lowerCaseHeader as keyof CityTableType]))
+                    compare(b[lowerCaseHeader as keyof CityDateTypeForTable], a[lowerCaseHeader as keyof CityDateTypeForTable]))
                 break;
             case "original":
                result = restructureData(cities);
