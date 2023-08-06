@@ -1,6 +1,6 @@
 import DeckGL from "@deck.gl/react/typed";
 import MapGL, {ViewState} from "react-map-gl";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { ScatterplotLayer} from "@deck.gl/layers/typed";
 
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -13,7 +13,8 @@ type MapDataType = {
 interface Props {
     data: MapDataType[],
     longitude?: string,
-    latitude?: string
+    latitude?: string,
+    onPointClick?: (object: MapDataType) => void
 }
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN as string;
@@ -21,8 +22,8 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN as string;
 export const Map = ({
                         data,
                         longitude = "11.576124",
-                        latitude = "48.137154"}: Props) => {
-
+                        latitude = "48.137154",
+                        onPointClick}: Props) => {
     const [lng, setLng] = useState(Number(longitude));
     const [lat, setLat] = useState(Number(latitude));
     const [viewState, setViewState] = useState<ViewState>({
@@ -57,6 +58,7 @@ export const Map = ({
         setPointSize(pointSizeFn(8))
         setLat(Number(latitude));
         setLng(Number(longitude));
+        onPointClick !== undefined && onPointClick(city);
     };
 
 
@@ -72,6 +74,11 @@ export const Map = ({
             onClick: (info) => handlePointClick(info.object)
         })
     ]
+    useEffect(() => {
+        setLng(Number(longitude));
+        setLat(Number(latitude));
+        setViewState({...viewState, longitude: Number(longitude), latitude: Number(latitude)})
+    }, [latitude, longitude])
     return (
         <div className="map">
             <DeckGL

@@ -16,22 +16,41 @@ const fetchData = async () => {
         console.error(err);
     });
 }
+
+const DEFAULT_CLICKED_CITY_ID = "munich"
 function App() {
     const [cities, setCities] = useState<CityDataType[]>([]);
+    const [clickedCity, setClickedCity] = useState<CityDataType>(
+        cities?.filter(city => city.id === DEFAULT_CLICKED_CITY_ID)[0]);
+    const onCityClick = (city: CityDataType) => {
+        setClickedCity(city)
+    }
     useEffect(() => {
         fetchData().then((data) => {
             setCities(data.cities)
+            setClickedCity(data.cities?.filter((city: CityDataType) => city.id === DEFAULT_CLICKED_CITY_ID)[0]);
         })
     }, [])
     return (
-        <div className="App">
+        <main className="App">
             {cities.length > 0 ? (
-                <CitiesTable cities={cities} />
-            ) : (
+                <div className="app-container">
+                    <CitiesTable
+                        cities={cities}
+                        clickedCity={clickedCity}
+                        onCityClick={(city) => onCityClick(city)}
+                    />
+                    <Map
+                        latitude={clickedCity.latitude}
+                        longitude={clickedCity.longitude}
+                        onPointClick={(city) => onCityClick(city as CityDataType)}
+                        data={cities}
+                    />
+                </div>
+            ): (
                 <div>waiting</div>
             )}
-            <Map data={cities} />
-        </div>
+        </main>
   );
 }
 

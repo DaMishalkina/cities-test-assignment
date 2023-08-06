@@ -3,17 +3,24 @@ import React from "react";
 import {TableHeaders} from "./TableHeaders/TableHeaders";
 import {TableRow} from "./TableRow/TableRow";
 
-import {TableDataType} from "./types/types";
+import {RowType, TableDataType} from "./types/types";
 
 import "./Table.scss"
 
 interface Props {
     data: TableDataType,
     headers?: string[],
-    sortColumnData?: (header: string, sortState: string) => void
+    sortColumnData?: (header: string, sortState: string) => void,
+    activeRow?: RowType,
+    onRowCLick?: (row: RowType) => void,
 }
 
-export const Table = ({data, headers, sortColumnData}: Props) => {
+export const Table = ({
+                          data,
+                          headers,
+                          sortColumnData,
+                          activeRow,
+                          onRowCLick}: Props) => {
     const sortData = (header: string, sortState: string) => {
         typeof sortColumnData !== "undefined" && sortColumnData(header, sortState);
     };
@@ -33,7 +40,13 @@ export const Table = ({data, headers, sortColumnData}: Props) => {
                 )}
                 <tbody>
                 {data.map((row, id) => (
-                  <TableRow row={row} key={id} />
+                  <TableRow
+                      row={row}
+                      key={id}
+                      isRowActive={row.name=== activeRow?.name}
+                      isClickable={!!activeRow}
+                      onClick={onRowCLick}
+                  />
                 ))}
                 </tbody>
             </table>

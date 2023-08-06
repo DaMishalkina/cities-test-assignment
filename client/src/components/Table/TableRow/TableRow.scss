@@ -1,3 +1,21 @@
 .table__row:nth-child(odd){
   background: #F2F8FF;
 }
+
+.table-row--clickable {
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 119, 255, 0.7);
+    color: white;
+  }
+  &:focus, &:active {
+    background: white;
+    color: rgb(0, 119, 255);
+    outline: 2px solid rgb(0, 119, 255);
+    outline-offset: -2px;
+  }
+}
+
+.table-row--active {
+  color: rgb(0, 119, 255);
+}
