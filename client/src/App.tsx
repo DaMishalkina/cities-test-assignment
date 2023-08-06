@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 
+import {Map} from "./components/Map/Map";
 import {CitiesTable} from "./features/CitiesTable/CitiesTable";
 
 import {CityDataType} from "./features/CitiesTable/types/types";
+
+import "./App.scss";
 
 const fetchData = async () => {
 
@@ -21,13 +24,13 @@ function App() {
         })
     }, [])
     return (
-        <div>
+        <div className="App">
             {cities.length > 0 ? (
                 <CitiesTable cities={cities} />
             ) : (
                 <div>waiting</div>
             )}
-
+            <Map data={cities} />
         </div>
   );
 }

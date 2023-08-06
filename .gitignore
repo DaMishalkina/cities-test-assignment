@@ -35,4 +35,4 @@
 *.fig
 *.xd
 *.prettierignore
-*env.d.ts
+*.env
