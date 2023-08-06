@@ -1,17 +1,18 @@
+@import "src/styles/StyleVariables";
 .table__row:nth-child(odd){
-  background: #F2F8FF;
+  background: $primary--pale;
 }
 
 .table-row--clickable {
   cursor: pointer;
   &:hover {
-    background: rgba(0, 119, 255, 0.7);
-    color: white;
+    background: var(--row-bg, $primary--hover);
+    color: var(--row-color, white);
   }
   &:focus, &:active {
-    background: white;
-    color: rgb(0, 119, 255);
-    outline: 2px solid rgb(0, 119, 255);
+    --row-bg: white;
+    --row-color: $primary;
+    outline: 2px solid $primary;
     outline-offset: -2px;
   }
 }

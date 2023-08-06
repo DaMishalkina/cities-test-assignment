@@ -32,20 +32,30 @@ function App() {
         })
     }, [])
     return (
-        <main className="App">
+        <main className="main">
+            <h1>Cities Test Assignment</h1>
+            <p>
+
+            </p>
             {cities.length > 0 ? (
                 <div className="app-container">
-                    <CitiesTable
-                        cities={cities}
-                        clickedCity={clickedCity}
-                        onCityClick={(city) => onCityClick(city)}
-                    />
-                    <Map
-                        latitude={clickedCity.latitude}
-                        longitude={clickedCity.longitude}
-                        onPointClick={(city) => onCityClick(city as CityDataType)}
-                        data={cities}
-                    />
+                    <section className="app-container__item">
+                        <h2>Table</h2>
+                        <CitiesTable
+                            cities={cities}
+                            clickedCity={clickedCity}
+                            onCityClick={(city) => onCityClick(city)}
+                        />
+                    </section>
+                    <section className="app-container__item">
+                        <h2>Map</h2>
+                        <Map
+                            latitude={clickedCity.latitude}
+                            longitude={clickedCity.longitude}
+                            onPointClick={(city) => onCityClick(city as CityDataType)}
+                            data={cities}
+                        />
+                    </section>
                 </div>
             ): (
                 <div>waiting</div>

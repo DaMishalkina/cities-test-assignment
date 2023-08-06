@@ -1,3 +1,4 @@
+@import "src/styles/StyleVariables";
 .table-wrapper {
   overflow: auto;
 }
@@ -8,7 +9,7 @@
   table-layout:fixed
 }
 
-@media (min-width: 1024px) {
+@media (min-width: $screen--lg) {
   .table {
     width: 100%;
   }

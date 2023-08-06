@@ -1,3 +1,4 @@
+@import "src/styles/StyleVariables";
 .table__header {
   background: white;
   position: -webkit-sticky;
@@ -9,7 +10,7 @@
   font-size: 14px;
   line-height: 17px;
   text-transform: capitalize;
-  color: #07f;
+  color: $primary;
   &:first-child {
     padding: 16px 8px 16px 16px;
   }
@@ -33,6 +34,13 @@
   padding: 0;
   color: #9E9E9E;
   background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    color: $primary--hover;
+  }
+  &:focus {
+    color: $primary;
+  }
 }
 
 .header-container__icon {
