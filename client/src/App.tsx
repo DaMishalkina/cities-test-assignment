@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
+import {Map} from "./components/Map/Map";
 import {CitiesTable} from "./features/CitiesTable/CitiesTable";
 
 import {CityDataType} from "./features/CitiesTable/types/types";
@@ -27,7 +28,7 @@ function App() {
             ) : (
                 <div>waiting</div>
             )}
-
+            <Map data={cities} />
         </div>
   );
 }
