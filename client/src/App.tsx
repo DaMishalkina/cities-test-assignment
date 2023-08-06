@@ -34,9 +34,6 @@ function App() {
     return (
         <main className="main">
             <h1>Cities Test Assignment</h1>
-            <p>
-
-            </p>
             {cities.length > 0 ? (
                 <div className="app-container">
                     <section className="app-container__item">
