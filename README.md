@@ -17,7 +17,7 @@ This project is designed to fulfill the challenge of implementing a backend to s
 ## Features
 
 - REST API backend built using Node.js and Express to serve JSON data.
-- React frontend with interactive components to display city data.
+- React frontend with interactive components written in TypeScript to display city data.
 - Interactive map visualization using the react-deck-gl and react-map-gl libraries.
 - City data in the table can be sorted by columns.
 - Clicking on a city in the table highlights its location on the map.
