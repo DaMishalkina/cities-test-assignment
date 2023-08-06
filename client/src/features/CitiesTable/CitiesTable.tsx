@@ -17,7 +17,7 @@ const compare = (a: string | number, b: string | number) => {
 }
 
 export const CitiesTable = ({cities}: Props) => {
-    const [headers, setHeaders] = useState(Object.keys(cities[0]));
+    const headers = Object.keys(cities[0]);
     const restructureData = (data: CityDataType[]) => {
        return  data.map(item => {
             item.population = Number(item.population);
