@@ -32,10 +32,7 @@ const compare = (a: string | number, b: string | number) => {
 }
 
 export const CitiesTable = ({cities}: Props) => {
-    const [headers, setHeaders] = useState(Object.keys(cities[0]).map(key => {
-        key = key.replace( "_", " ");
-        return key;
-    }));
+    const [headers, setHeaders] = useState(Object.keys(cities[0]));
     const restructureData = (data: CityDataType[]) => {
        return  data.map(item => {
             item.population = Number(item.population);
@@ -49,7 +46,7 @@ export const CitiesTable = ({cities}: Props) => {
     }
     const [renderedCities, setRenderedCities] =  useState<CityTableType[]>(restructureData(cities))
     const sortData = (header: string, sortState: string) => {
-        const lowerCaseHeader = header.toLowerCase().replace(" ", "_");
+        const lowerCaseHeader = header.toLowerCase();
         let result = renderedCities;
         switch (sortState){
             case "ascending":

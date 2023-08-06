@@ -22,7 +22,7 @@ export const TableHeader = ({header, handleSort, isSortable = false}: Props) => 
                     isSortable && "header-container--sortable"
                 )}
             >
-                {header}
+                {header.replace( "_", " ")}
                 {isSortable && (
                     <button
                         onClick={() => {
