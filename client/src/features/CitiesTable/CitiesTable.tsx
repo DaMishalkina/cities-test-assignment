@@ -3,9 +3,12 @@ import React, {useState} from "react";
 import {Table} from "../../components/Table/Table";
 
 import {CityDataType, CityDateTypeForTable} from "./types/types";
+import {RowType} from "../../components/Table/types/types";
 
 interface Props {
-    cities: CityDataType[]
+    cities: CityDataType[],
+    clickedCity?: CityDataType,
+    onCityClick?: (city: CityDataType) => void
 }
 
 const compare = (a: string | number, b: string | number) => {
@@ -16,7 +19,7 @@ const compare = (a: string | number, b: string | number) => {
     }
 }
 
-export const CitiesTable = ({cities}: Props) => {
+export const CitiesTable = ({cities, clickedCity, onCityClick}: Props) => {
     const restructureData = (data: CityDataType[]) => {
        return  JSON.parse(JSON.stringify(data)).map((item: CityDataType ) => {
             item.population = Number(item.population);
@@ -46,9 +49,15 @@ export const CitiesTable = ({cities}: Props) => {
         }
         setRenderedCities(result)
     }
+    const handelRowCLick = (city: CityDateTypeForTable | RowType) => {
+        const res = cities.filter(item => item.name === city.name)[0];
+        onCityClick !== undefined && onCityClick(res);
+    }
     return (
         <>
             <Table
+                activeRow={clickedCity}
+                onRowCLick={(city) => handelRowCLick(city)}
                 data={renderedCities}
                 headers={headers}
                 sortColumnData={sortData}
