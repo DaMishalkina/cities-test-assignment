@@ -17,7 +17,6 @@ const compare = (a: string | number, b: string | number) => {
 }
 
 export const CitiesTable = ({cities}: Props) => {
-    const headers = Object.keys(cities[0]);
     const restructureData = (data: CityDataType[]) => {
        return  JSON.parse(JSON.stringify(data)).map((item: CityDataType ) => {
             item.population = Number(item.population);
@@ -28,7 +27,8 @@ export const CitiesTable = ({cities}: Props) => {
             return item;
         })
     }
-    const [renderedCities, setRenderedCities] =  useState<CityDateTypeForTable[]>(restructureData(cities))
+    const [renderedCities, setRenderedCities] =  useState<CityDateTypeForTable[]>(restructureData(cities));
+    const headers = Object.keys(renderedCities[0]);
     const sortData = (header: string, sortState: string) => {
         const lowerCaseHeader = header.toLowerCase();
         let result = renderedCities;

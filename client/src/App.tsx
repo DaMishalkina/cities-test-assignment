@@ -5,6 +5,8 @@ import {CitiesTable} from "./features/CitiesTable/CitiesTable";
 
 import {CityDataType} from "./features/CitiesTable/types/types";
 
+import "./App.scss";
+
 const fetchData = async () => {
 
     return await fetch("http://localhost:8080/cities", {mode: "cors"}).
@@ -22,7 +24,7 @@ function App() {
         })
     }, [])
     return (
-        <div>
+        <div className="App">
             {cities.length > 0 ? (
                 <CitiesTable cities={cities} />
             ) : (

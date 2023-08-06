@@ -73,7 +73,7 @@ export const Map = ({
         })
     ]
     return (
-        <div className="map-container">
+        <div className="map">
             <DeckGL
                 getCursor={() => "pointer"}
                 initialViewState={viewState}
