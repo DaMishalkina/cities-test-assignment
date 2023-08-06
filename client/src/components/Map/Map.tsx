@@ -46,6 +46,19 @@ export const Map = ({
         setViewState(newViewport);
 
     }
+    const handlePointClick = (city: MapDataType) => {
+        const {longitude, latitude} = city;
+        setViewState({
+            ...viewState,
+            longitude: Number(longitude),
+            latitude: Number(latitude),
+            zoom: 8
+        });
+        setPointSize(pointSizeFn(8))
+        setLat(Number(latitude));
+        setLng(Number(longitude));
+    };
+
 
     const layers = [
         new ScatterplotLayer({
@@ -54,12 +67,15 @@ export const Map = ({
             getPosition: (d: MapDataType) => [Number(d.longitude), Number(d.latitude), 0],
             radiusScale: 10,
             getFillColor: [0, 119, 255],
-            getRadius: pointSize
+            getRadius: pointSize,
+            pickable: true,
+            onClick: (info) => handlePointClick(info.object)
         })
     ]
     return (
         <div className="map-container">
             <DeckGL
+                getCursor={() => "pointer"}
                 initialViewState={viewState}
                 onViewStateChange={evt => handleZoomChange(evt.viewState as ViewState)}
                 controller={true}
