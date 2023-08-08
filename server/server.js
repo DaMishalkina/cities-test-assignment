@@ -10,9 +10,8 @@ fs.readFile("./cities.json", "utf8", (err,data) => {
     }
     cities = JSON.parse(data);
     // This can be done on the db/file level, but for simplicity I create id on the fly.
-    cities["cities"] = cities["cities"].map(city => {
+    cities["cities"] = [...cities["cities"]].map(city => {
         city.id = city["name"].toLowerCase().replace(/\s/g, "-");
-        delete  city["landmarks"]
         return city;
     })
 
@@ -22,7 +21,9 @@ fs.readFile("./cities.json", "utf8", (err,data) => {
 // At scale this request could be optimized by returning only particular fields instead of the whole db/file.
 app.get("/cities", (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    res.json(cities);
+    res.json([...cities["cities"]].map(city => {
+        return (({landmarks, ...others}) => ({...others}))(city);
+    }))
 })
 
 
@@ -32,7 +33,7 @@ app.get("/landmarks/:id", (req, res) => {
     let landmarks = [];
     cities["cities"].forEach(city => {
         if(city.id === id){
-            landmarks = city.landmarks;
+            landmarks = city["landmarks"];
         }
     })
     res.json(landmarks);
