@@ -24,10 +24,7 @@ export const CitiesTable = ({cities, clickedCity, onCityClick}: Props) => {
        return  JSON.parse(JSON.stringify(data)).map((item: CityDataType ) => {
             item.population = Number(item.population);
             item.founded = Number(item.founded);
-            delete item.id;
-            delete item.latitude;
-            delete item.longitude
-            return item;
+            return (({id, latitude, longitude, ...others}) => ({...others}))(item)
         })
     }
     const [renderedCities, setRenderedCities] =  useState<CityDateTypeForTable[]>(restructureData(cities));
@@ -49,7 +46,7 @@ export const CitiesTable = ({cities, clickedCity, onCityClick}: Props) => {
         }
         setRenderedCities(result)
     }
-    const handelRowCLick = (city: CityDateTypeForTable | RowType) => {
+    const handelRowCLick = (city: RowType) => {
         const res = cities.find(item => item.name === city.name);
         onCityClick && res && onCityClick(res);
     }
