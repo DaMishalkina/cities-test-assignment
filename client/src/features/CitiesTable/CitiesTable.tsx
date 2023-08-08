@@ -50,8 +50,8 @@ export const CitiesTable = ({cities, clickedCity, onCityClick}: Props) => {
         setRenderedCities(result)
     }
     const handelRowCLick = (city: CityDateTypeForTable | RowType) => {
-        const res = cities.filter(item => item.name === city.name)[0];
-        onCityClick !== undefined && onCityClick(res);
+        const res = cities.find(item => item.name === city.name);
+        onCityClick && res && onCityClick(res);
     }
     return (
         <>

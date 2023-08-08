@@ -24,7 +24,7 @@ export const TableRow = ({row, isRowActive = false, onClick, isClickable = false
                 isRowActive && "table-row--active"
                 )}
             onClick={() => {
-                isClickable && onClick !== undefined && onClick(row);
+                isClickable && onClick && onClick(row);
             }}
         >
             {Object.values(row).map((value, id) => (
