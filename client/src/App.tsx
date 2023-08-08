@@ -10,30 +10,31 @@ import {CityDataType} from "./features/CitiesTable/types/types";
 
 import "./App.scss";
 
-const fetchData = async () => {
-
-    return await fetch("http://localhost:8080/cities", {mode: "cors"}).
-    then(response => {
-        return response.json();
-    }).catch((err) => {
-        console.error(err);
-    });
-}
-
 
 const DEFAULT_CLICKED_CITY_ID = "munich"
 function App() {
     const [cities, setCities] = useState<CityDataType[]>([]);
-    const [clickedCity, setClickedCity] = useState<CityDataType>(
-        cities?.filter(city => city.id === DEFAULT_CLICKED_CITY_ID)[0]);
+    const [clickedCity, setClickedCity] = useState<CityDataType>();
     const onCityClick = (city: CityDataType) => {
         setClickedCity(city)
     }
     useEffect(() => {
-        fetchData().then((data) => {
-            setCities(data.cities)
-            setClickedCity(data.cities?.filter((city: CityDataType) => city.id === DEFAULT_CLICKED_CITY_ID)[0]);
-        })
+        const fetchData = async (url: string) => {
+            try {
+                let response = await fetch(url);
+                if (response.status === 200) {
+                    return  await response.json();
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchData("http://localhost:8080/cities").then(res => {
+            setCities(res.cities)
+            setClickedCity(res.cities.find((city: CityDataType) =>
+                city.id === DEFAULT_CLICKED_CITY_ID
+            ))
+        });
     }, [])
     return (
         <main className="main">
@@ -51,8 +52,8 @@ function App() {
                     <section className="app-container__item">
                         <h2>Map</h2>
                         <Map
-                            latitude={clickedCity.latitude}
-                            longitude={clickedCity.longitude}
+                            latitude={clickedCity?.latitude}
+                            longitude={clickedCity?.longitude}
                             onPointClick={(city) => onCityClick(city as CityDataType)}
                             data={cities}
                         />
