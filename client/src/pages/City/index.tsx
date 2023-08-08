@@ -3,29 +3,42 @@ import {useParams} from "react-router-dom";
 
 import {fetchData} from "../../utils/fetchData";
 
-import "./City.scss";
+import {CityDataType} from "../../features/CitiesTable/types/types";
 
-type Landmarks = string[];
+import "./City.scss";
+import {Map} from "../../components/Map/Map";
+
+type Landmark = {
+    name: string,
+    latitude: string,
+    longitude: string
+}
+
+type Landmarks = Landmark[];
+type CityDataWithLandmarks = CityDataType & {
+    landmarks: Landmarks
+}
+
 
 export const City = () => {
     const {id} = useParams();
-    const [landMarks, setLandmarks] = useState<Landmarks>([]);
+    const [city, setCity] = useState<CityDataWithLandmarks>();
     useEffect(() => {
-        fetchData(`http://localhost:8080/landmarks/${id}`).then(res => console.log(res))
+        fetchData(`http://localhost:8080/cities/${id}`).then(res => setCity(res))
     }, [])
-
     return (
-        <div>
-            {id}
-            {landMarks?.length > 0 ? (
-                <ul>
-                    {landMarks.map(mark => (
-                        <li>{mark}</li>
-                        ))}
-                </ul>
+        <main className="main--city">
+            {city ? (
+                <Map
+                    data={city?.landmarks && city?.landmarks}
+                    longitude={city?.longitude}
+                    latitude={city?.latitude}
+                    zoom={11}
+                />
             ) : (
                 <div>waiting</div>
             )}
-        </div>
+
+        </main>
     )
 }

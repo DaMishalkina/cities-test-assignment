@@ -20,8 +20,8 @@ export const Home = () => {
     }
     useEffect(() => {
         fetchData("http://localhost:8080/cities").then(res => {
-            setCities(res.cities)
-            setClickedCity(res.cities.find((city: CityDataType) =>
+            setCities(res)
+            setClickedCity(res?.find((city: CityDataType) =>
                 city.id === DEFAULT_CLICKED_CITY_ID
             ))
         });
@@ -29,7 +29,7 @@ export const Home = () => {
     return (
         <main className="main">
             <h1>Cities Test Assignment</h1>
-            {cities.length > 0 ? (
+            {cities?.length > 0 ? (
                 <div className="app-container">
                     <section className="app-container__item">
                         <h2>Table</h2>

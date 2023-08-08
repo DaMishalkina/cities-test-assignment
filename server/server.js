@@ -27,16 +27,10 @@ app.get("/cities", (req, res) => {
 })
 
 
-app.get("/landmarks/:id", (req, res) => {
+app.get("/cities/:id", (req, res) => {
     const id = req.params.id;
     res.set('Access-Control-Allow-Origin', '*');
-    let landmarks = [];
-    cities["cities"].forEach(city => {
-        if(city.id === id){
-            landmarks = city["landmarks"];
-        }
-    })
-    res.json(landmarks);
+    res.json(cities["cities"].find(city => city.id === id))
 })
 
 app.listen(8080, () => {console.log("Server started on port 8080")})
