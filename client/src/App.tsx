@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from "react";
+
 
 import {Map} from "./components/Map/Map";
 import {CitiesTable} from "./features/CitiesTable/CitiesTable";
+import {MainPageLoader} from "./features/MainPageLoader/MainPageLoader";
+
 
 import {CityDataType} from "./features/CitiesTable/types/types";
 
@@ -16,6 +19,7 @@ const fetchData = async () => {
         console.error(err);
     });
 }
+
 
 const DEFAULT_CLICKED_CITY_ID = "munich"
 function App() {
@@ -55,7 +59,7 @@ function App() {
                     </section>
                 </div>
             ): (
-                <div>waiting</div>
+                <MainPageLoader />
             )}
         </main>
   );
