@@ -23,7 +23,7 @@ export const City = () => {
             setLat(res.latitude);
             setLng(res.longitude);
         })
-    }, [])
+    }, [id])
     return (
         <main className="main--city">
             {city ? (
