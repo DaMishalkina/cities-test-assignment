@@ -50,14 +50,15 @@ export const CityCard = ({city, handleLandmarkClick}: Props) => {
                         })}
                     </ul>
                     {landmarks.length > 0 && (
-                        <>
+                        <div className="landmarks city-card__landmarks">
                             <h2>Landmarks</h2>
-                            <ul>
+                            <ul className="landmarks__list">
                                 {landmarks.map(mark => {
                                     const {name, latitude, longitude} = mark;
                                     return (
-                                        <li key={name}>
+                                        <li className="landmark landmarks__item" key={name}>
                                             <button
+                                                className="landmark__button"
                                                 onClick={() => {
                                                     handleLandmarkClick && handleLandmarkClick(latitude, longitude);
                                                     setIsToggle(false);
@@ -69,7 +70,7 @@ export const CityCard = ({city, handleLandmarkClick}: Props) => {
                                     )
                                 })}
                             </ul>
-                        </>
+                        </div>
                     )}
                 </div>
             )}

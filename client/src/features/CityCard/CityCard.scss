@@ -9,6 +9,7 @@
   margin: 12px;
   border-radius: 10px;
   width: 250px;
+  font-size: $size-step-0;
 }
 
 .city-card h1, .city-card h2 {
@@ -87,5 +88,22 @@ html:focus-within {
   &:focus {
     color: $primary;
     outline: none;
+  }
+}
+
+.landmark__button {
+  background: none;
+  cursor: pointer;
+  border: none;
+  font-size: $size-step-0;
+  color: var(--landmark-color, $primary);
+  padding: 0;
+  border-bottom: 2px solid var(--landmark-color, $primary);
+  &:hover {
+    --landmark-color: #{$primary--hover};
+  }
+  &:focus {
+    outline: none;
+    --landmark-color: #{$primary--focus};
   }
 }
