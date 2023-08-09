@@ -5,6 +5,12 @@
   height: 100vh;
 }
 
-.main--city .map {
+.city-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.city-container .map {
   height: 100%;
 }
