@@ -1,9 +1,9 @@
 import DeckGL from "@deck.gl/react/typed";
 import MapGL, {ViewState} from "react-map-gl";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import { ScatterplotLayer} from "@deck.gl/layers/typed";
 
-
+import {useResize} from "../../hooks/useResize";
 import {
     MAPBOX_TOKEN,
     DEFAULT_ZOOM,
@@ -52,6 +52,12 @@ export const Map = ({
         pitch: DEFAULT_PITCH,
         padding: DEFAULT_PADDING
     });
+
+    const onResize = useCallback(() => {
+        setViewState({ ...viewState });
+    }, []);
+
+    useResize(onResize);
     const [pointSize, setPointSize] = useState<number>(DEFAULT_POINT_SIZE);
     const handleZoomChange = (newViewport: ViewState) => {
         const newPointSize = pointSizeFn(newViewport.zoom);
