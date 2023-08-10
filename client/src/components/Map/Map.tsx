@@ -80,17 +80,22 @@ export const Map = ({
         onPointClick !== undefined && onPointClick(city);
     };
 
-
     const layers = [
         new ScatterplotLayer({
             id: "scatterplot-layer",
             data,
             getPosition: (d: MapDataType) => [Number(d.longitude), Number(d.latitude), 0],
             radiusScale: RADIUS_SCALE,
-            getFillColor:[0, 119, 255],
+            getFillColor: (d: MapDataType) =>
+                Number(d.longitude) === lng && Number(d.latitude) === lat ? [246, 92, 150] : [0, 119, 255],
             getRadius: pointSize,
             pickable: true,
-            onClick: (info) => handlePointClick(info.object)
+            onClick: (info) => handlePointClick(info.object),
+            updateTriggers: {
+                getFillColor: [
+                   lat, lng
+                ]
+            },
         })
     ]
     useEffect(() => {

@@ -10,6 +10,7 @@
   border-radius: 10px;
   width: 250px;
   font-size: $size-step-0;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
 }
 
 .city-card h1, .city-card h2 {
@@ -104,6 +105,16 @@ html:focus-within {
   }
   &:focus {
     outline: none;
-    --landmark-color: #{$primary--focus};
+    --landmark-color: #{$highlight};
   }
+}
+
+.city-card__info {
+  max-height: 0;
+  transition: max-height 0.5s ease-out;
+  overflow: hidden;
+}
+.city-card__info.visible {
+  max-height: 500px;
+  transition: max-height 0.5s ease-in;
 }

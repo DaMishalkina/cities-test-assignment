@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {CityDataWithLandmarks} from "../../pages/City/types/types";
 
 import "./CityCard.scss";
+import classNames from "classnames";
 
 interface Props {
     city: CityDataWithLandmarks,
@@ -36,42 +37,45 @@ export const CityCard = ({city, handleLandmarkClick}: Props) => {
                     </svg>
                 </button>
             </div>
-            {isToggle && (
-                <div className="city-card__container">
-                    <ul>
-                        {Object.entries((({landmarks, name, id, longitude, latitude, ...others}) => ({...others}))(city)).map(item => {
-                            const [key, value] = item;
+            <div
+                className={classNames(
+                    "city-card__info",
+                    isToggle && "visible"
+                )}
+            >
+                <ul>
+                    {Object.entries((({landmarks, name, id, longitude, latitude, ...others}) => ({...others}))(city)).map(item => {
+                        const [key, value] = item;
+                        return (
+                            <li key={key}>
+                                <strong>{key.replace("_", " ")}: </strong>
+                                {value}
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            {landmarks.length > 0 && (
+                <div className="landmarks city-card__landmarks">
+                    <h2>Landmarks</h2>
+                    <ul className="landmarks__list">
+                        {landmarks.map(mark => {
+                            const {name, latitude, longitude} = mark;
                             return (
-                                <li key={key}>
-                                    <strong>{key.replace("_", " ")}: </strong>
-                                    {value}
+                                <li className="landmark landmarks__item" key={name}>
+                                    <button
+                                        className="landmark__button"
+                                        onClick={() => {
+                                            handleLandmarkClick && handleLandmarkClick(latitude, longitude);
+                                            setIsToggle(false);
+                                        }}
+                                    >
+                                        {name}
+                                    </button>
                                 </li>
                             )
                         })}
                     </ul>
-                    {landmarks.length > 0 && (
-                        <div className="landmarks city-card__landmarks">
-                            <h2>Landmarks</h2>
-                            <ul className="landmarks__list">
-                                {landmarks.map(mark => {
-                                    const {name, latitude, longitude} = mark;
-                                    return (
-                                        <li className="landmark landmarks__item" key={name}>
-                                            <button
-                                                className="landmark__button"
-                                                onClick={() => {
-                                                    handleLandmarkClick && handleLandmarkClick(latitude, longitude);
-                                                    setIsToggle(false);
-                                                }}
-                                            >
-                                                {name}
-                                            </button>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                    )}
                 </div>
             )}
         </div>

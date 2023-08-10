@@ -3,6 +3,7 @@ $primary: rgb(0, 119, 255);
 $primary--pale: #F2F8FF;
 $primary--hover: rgba($primary, 0.7);
 $primary--focus: #002493;
+$highlight: rgb(246, 92, 150);
 $text-color: rgb(0, 16, 75);
 $size-step--2: clamp(0.63rem, calc(0.64rem + -0.01vw), 0.64rem);
 $size-step--1: clamp(0.80rem, calc(0.78rem + 0.08vw), 0.84rem);
