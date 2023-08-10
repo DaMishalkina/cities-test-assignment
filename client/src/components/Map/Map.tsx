@@ -29,7 +29,8 @@ interface Props {
     zoom?: number
 }
 const pointSizeFn = (zoom: number) => {
-    if (zoom >= 10) return 20;
+    if (zoom >= 15) return 5;
+    if (zoom < 15 && zoom >= 10) return 20;
     if(zoom < 10 && zoom >= 8) return 50;
     if(zoom < 8 && zoom > 5) return -(800/3)*zoom + 7000/3;
     if(zoom <= 5 && zoom > 1) return -1000*zoom + 6000;
@@ -79,17 +80,22 @@ export const Map = ({
         onPointClick !== undefined && onPointClick(city);
     };
 
-
     const layers = [
         new ScatterplotLayer({
             id: "scatterplot-layer",
             data,
             getPosition: (d: MapDataType) => [Number(d.longitude), Number(d.latitude), 0],
             radiusScale: RADIUS_SCALE,
-            getFillColor:[0, 119, 255],
+            getFillColor: (d: MapDataType) =>
+                Number(d.longitude) === lng && Number(d.latitude) === lat ? [246, 92, 150] : [0, 119, 255],
             getRadius: pointSize,
             pickable: true,
-            onClick: (info) => handlePointClick(info.object)
+            onClick: (info) => handlePointClick(info.object),
+            updateTriggers: {
+                getFillColor: [
+                   lat, lng
+                ]
+            },
         })
     ]
     useEffect(() => {
@@ -100,6 +106,7 @@ export const Map = ({
             longitude: Number(longitude),
             latitude: Number(latitude),
             zoom: zoom})
+        setPointSize(pointSizeFn(zoom))
     }, [latitude, longitude, zoom])
     return (
         <div className="map">
