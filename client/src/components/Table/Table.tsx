@@ -43,7 +43,7 @@ export const Table = ({
                   <TableRow
                       row={row}
                       key={id}
-                      isRowActive={row.name=== activeRow?.name}
+                      isRowActive={activeRow && row["name_native"]=== activeRow["name_native"]}
                       isClickable={!!activeRow}
                       onClick={onRowCLick}
                   />

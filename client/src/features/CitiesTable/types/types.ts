@@ -1,6 +1,7 @@
+import {ReactElement} from "react";
 
 export type CityDateTypeForTable = {
-    name: string,
+    name: string | TableLink,
     name_native: string,
     country: string,
     continent: string,
@@ -13,3 +14,10 @@ export type CityDataType = CityDateTypeForTable  &{
     latitude?: string,
     longitude?: string,
 }
+
+type LinkProps = {
+    to: string,
+    children: string | number,
+}
+
+export type TableLink = ReactElement<LinkProps>

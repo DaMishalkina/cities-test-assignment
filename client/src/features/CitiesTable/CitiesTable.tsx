@@ -1,8 +1,9 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 import {Table} from "../../components/Table/Table";
 
-import {CityDataType, CityDateTypeForTable} from "./types/types";
+import {CityDataType, CityDateTypeForTable, TableLink} from "./types/types";
 import {RowType} from "../../components/Table/types/types";
 
 interface Props {
@@ -11,11 +12,19 @@ interface Props {
     onCityClick?: (city: CityDataType) => void
 }
 
-const compare = (a: string | number, b: string | number) => {
-    if(typeof a === "string"){
-        return a.localeCompare(b as string)
-    } else {
-        return a - (b as number)
+
+const compare = (
+    a: string | number | TableLink,
+    b: string | number| TableLink): number => {
+    switch (typeof a) {
+        case "string":
+           return a.localeCompare(b as string);
+        case "number":
+           return  a - (b as number);
+        case "object":
+            return compare(a.props.children, (b as TableLink).props.children);
+        default:
+            return 0;
     }
 }
 
@@ -24,7 +33,9 @@ export const CitiesTable = ({cities, clickedCity, onCityClick}: Props) => {
        return  JSON.parse(JSON.stringify(data)).map((item: CityDataType ) => {
             item.population = Number(item.population);
             item.founded = Number(item.founded);
-            return (({id, latitude, longitude, ...others}) => ({...others}))(item)
+            return (({id, latitude, longitude, name, ...others}) => ({name:
+                <Link to={`/${item.id}`}>{item.name}</Link>
+            , ...others}))(item)
         })
     }
     const [renderedCities, setRenderedCities] =  useState<CityDateTypeForTable[]>(restructureData(cities));
@@ -47,7 +58,7 @@ export const CitiesTable = ({cities, clickedCity, onCityClick}: Props) => {
         setRenderedCities(result)
     }
     const handelRowCLick = (city: RowType) => {
-        const res = cities.find(item => item.name === city.name);
+        const res = cities.find(item => item["name_native"] === city["name_native"]);
         onCityClick && res && onCityClick(res);
     }
     return (

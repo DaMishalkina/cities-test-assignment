@@ -14,11 +14,13 @@ import {
     DEFAULT_PADDING
 } from "./const/const";
 
+import {TableLink} from "../../features/CitiesTable/types/types";
+
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./Map.scss";
 
 type MapDataType = {
-    [key: string]: string | number
+    [key: string]: string | number | TableLink
 }
 
 interface Props {
