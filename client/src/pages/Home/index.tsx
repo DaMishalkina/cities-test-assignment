@@ -10,7 +10,8 @@ import {CityDataType} from "../../features/CitiesTable/types/types";
 
 import "./Home.scss";
 
-const DEFAULT_CLICKED_CITY_ID = "munich"
+const DEFAULT_CLICKED_CITY_ID = "munich";
+const URL = process.env.NODE_ENV === "development" ? "http://localhost:8080/cities" : ""
 
 export const Home = () => {
     const [cities, setCities] = useState<CityDataType[]>([]);
@@ -21,7 +22,7 @@ export const Home = () => {
         mapRef?.current?.scrollIntoView({behavior: "smooth"});
     }
     useEffect(() => {
-        fetchData("http://localhost:8080/cities").then(res => {
+        fetchData(URL).then(res => {
             setCities(res)
             setClickedCity(res?.find((city: CityDataType) =>
                 city.id === DEFAULT_CLICKED_CITY_ID

@@ -19,11 +19,22 @@ export const City = () => {
     const [lat, setLat] = useState<string>();
     const [zoom, setZoom] = useState(11);
     useEffect(() => {
-        fetchData(`http://localhost:8080/cities/${id}`).then(res => {
-            setCity(res);
-            setLat(res.latitude);
-            setLng(res.longitude);
-        })
+        process.env.NODE_ENV === "development" ?
+            fetchData(`http://localhost:8080/cities/${id}`).then(res => {
+                setCity(res);
+                setLat(res.latitude);
+                setLng(res.longitude);
+            })
+            :
+            fetchData(`/${id}`).then(res => {
+                const resCity = res?.find((item: CityDataWithLandmarks) =>
+                    item.id === id
+                );
+                setCity(resCity);
+                setLat(resCity.latitude);
+                setLng(resCity.longitude);
+            })
+
     }, [id])
     return (
         <main className="city-main main--city">
