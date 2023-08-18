@@ -1,5 +1,6 @@
 import DeckGL from "@deck.gl/react/typed";
 import MapGL, {ViewState} from "react-map-gl";
+import mapboxgl from "mapbox-gl";
 import React, {useCallback, useEffect, useState} from "react";
 import { ScatterplotLayer} from "@deck.gl/layers/typed";
 
@@ -18,6 +19,10 @@ import {TableLink} from "../../features/CitiesTable/types/types";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./Map.scss";
+
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 type MapDataType = {
     [key: string]: string | number | TableLink
