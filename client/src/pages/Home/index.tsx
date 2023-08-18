@@ -28,7 +28,7 @@ export const Home = () => {
     }, [])
     return (
         <main className="main">
-            <h1>Cities Test Assignment</h1>
+            <h1>Cities</h1>
             {cities?.length > 0 ? (
                 <div className="app-container">
                     <section className="app-container__item">
@@ -50,7 +50,7 @@ export const Home = () => {
                     </section>
                 </div>
             ): (
-                <MainPageLoader />
+                <MainPageLoader className="main__loader" />
             )}
         </main>
     );

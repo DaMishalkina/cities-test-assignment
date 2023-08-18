@@ -6,6 +6,11 @@
   max-width: $screen--lg;
   margin: 0 auto;
 }
+
+:is(.main .main__loader) {
+  height: 100vh;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -49,8 +54,6 @@
 html:focus-within {
   scroll-behavior: smooth;
 }
-
-
 
 @media (min-width: $screen--lg) {
   .main {
