@@ -1,4 +1,4 @@
-import {useEffect, useState}  from "react";
+import {useEffect, useRef, useState}  from "react";
 
 import {fetchData} from "../../utils/fetchData";
 import {CitiesTable} from "../../features/CitiesTable/CitiesTable";
@@ -15,8 +15,10 @@ const DEFAULT_CLICKED_CITY_ID = "munich"
 export const Home = () => {
     const [cities, setCities] = useState<CityDataType[]>([]);
     const [clickedCity, setClickedCity] = useState<CityDataType>();
+    const mapRef = useRef<HTMLDivElement | null>(null);
     const onCityClick = (city: CityDataType) => {
-        setClickedCity(city)
+        setClickedCity(city);
+        mapRef?.current?.scrollIntoView({behavior: "smooth"});
     }
     useEffect(() => {
         fetchData("http://localhost:8080/cities").then(res => {
@@ -39,7 +41,7 @@ export const Home = () => {
                             onCityClick={(city) => onCityClick(city)}
                         />
                     </section>
-                    <section className="app-container__item">
+                    <section className="app-container__item" ref={mapRef}>
                         <h2>Map</h2>
                         <Map
                             latitude={clickedCity?.latitude}
