@@ -26,8 +26,8 @@ export const City = () => {
                 setLng(res.longitude);
             })
             :
-            fetchData(`/${id}`).then(res => {
-                const resCity = res?.find((item: CityDataWithLandmarks) =>
+            fetchData(`https://raw.githubusercontent.com/DaMishalkina/cities-test-assignment/main/client/src/productionData/cities.json`).then(res => {
+                const resCity = res.cities?.find((item: CityDataWithLandmarks) =>
                     item.id === id
                 );
                 setCity(resCity);

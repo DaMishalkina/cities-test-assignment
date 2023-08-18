@@ -11,7 +11,7 @@ import {CityDataType} from "../../features/CitiesTable/types/types";
 import "./Home.scss";
 
 const DEFAULT_CLICKED_CITY_ID = "munich";
-const URL = process.env.NODE_ENV === "development" ? "http://localhost:8080/cities" : ""
+const URL = process.env.NODE_ENV === "development" ? "http://localhost:8080/cities" : "https://raw.githubusercontent.com/DaMishalkina/cities-test-assignment/main/client/src/productionData/cities.json";
 
 export const Home = () => {
     const [cities, setCities] = useState<CityDataType[]>([]);
@@ -23,8 +23,11 @@ export const Home = () => {
     }
     useEffect(() => {
         fetchData(URL).then(res => {
-            setCities(res)
-            setClickedCity(res?.find((city: CityDataType) =>
+            const resCities = process.env.NODE_ENV === "development" ? res : [...res?.cities].map(city => {
+                return (({landmarks, ...others}) => ({...others}))(city);
+            });
+            setCities(resCities)
+            setClickedCity(resCities?.find((city: CityDataType) =>
                 city.id === DEFAULT_CLICKED_CITY_ID
             ))
         });
