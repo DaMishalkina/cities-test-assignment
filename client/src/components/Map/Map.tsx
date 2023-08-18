@@ -58,7 +58,7 @@ export const Map = ({
 
     const onResize = useCallback(() => {
         setViewState({ ...viewState });
-    }, []);
+    }, [viewState]);
 
     useResize(onResize);
     const [pointSize, setPointSize] = useState<number>(DEFAULT_POINT_SIZE);
@@ -103,11 +103,19 @@ export const Map = ({
     useEffect(() => {
         setLng(Number(longitude));
         setLat(Number(latitude));
-        setViewState({
-            ...viewState,
-            longitude: Number(longitude),
-            latitude: Number(latitude),
-            zoom: zoom})
+        // setViewState({
+        //     ...viewState,
+        //     longitude: Number(longitude),
+        //     latitude: Number(latitude),
+        //     zoom: zoom})
+        setViewState((prevState) => {
+            return {
+                ...prevState,
+                longitude: Number(longitude),
+                latitude: Number(latitude),
+                zoom: zoom,
+            }
+        })
         setPointSize(pointSizeFn(zoom))
     }, [latitude, longitude, zoom])
     return (
