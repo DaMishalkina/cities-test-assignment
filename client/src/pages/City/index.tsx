@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 
 import {fetchData} from "../../utils/fetchData";
 import {CityCard} from "../../features/CityCard/CityCard";
+import {CityPageLoader} from "../../features/CityPageLoader/CityPageLoader";
 
 import {CityDataWithLandmarks} from "./types/types";
 
@@ -25,7 +26,7 @@ export const City = () => {
         })
     }, [id])
     return (
-        <main className="main--city">
+        <main className="city-main main--city">
             {city ? (
                 <section className="city-container">
                     <CityCard
@@ -45,9 +46,11 @@ export const City = () => {
                     />
                 </section>
             ) : (
-                <div>waiting</div>
+                <section className="city-main__loader-section">
+                    <h1>{id}</h1>
+                    <CityPageLoader />
+                </section>
             )}
-
         </main>
     )
 }
