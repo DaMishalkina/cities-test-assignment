@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/cities-test-assignment/static/css/main.c17f5aca.css",
+    "main.js": "/cities-test-assignment/static/js/main.1eeb4f67.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/cities-test-assignment/static/js/787.c4e7f8f9.chunk.js",
+    "static/js/mapbox-gl-csp-worker.31b18acd.worker.js": "/cities-test-assignment/static/js/mapbox-gl-csp-worker.31b18acd.worker.js",
+    "index.html": "/cities-test-assignment/index.html",
+    "main.c17f5aca.css.map": "/cities-test-assignment/static/css/main.c17f5aca.css.map",
+    "main.1eeb4f67.js.map": "/cities-test-assignment/static/js/main.1eeb4f67.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/cities-test-assignment/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c17f5aca.css",
+    "static/js/main.1eeb4f67.js"
+  ]
+}
