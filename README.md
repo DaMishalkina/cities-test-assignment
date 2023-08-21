@@ -5,6 +5,7 @@ This project provides a backend and frontend solution for displaying information
 ## Table of Contents
 
 - [Introduction](#introduction)
+  - [Links](#links)
 - [Features](#features)
 - [Setup](#setup)
 - [Known Issues](#known-issues)
@@ -13,6 +14,10 @@ This project provides a backend and frontend solution for displaying information
 ## Introduction
 
 This project is designed to fulfill the challenge of implementing a backend to serve JSON data and a frontend to display it. The backend returns city data via a REST API endpoint, and the frontend retrieves and presents this data through a table and a map.
+
+### Links
+
+- Solution URL: [cities-test-assignment](https://damishalkina.github.io/cities-test-assignment/#)
 
 ## Features
 
